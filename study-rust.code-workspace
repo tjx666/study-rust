@@ -15,10 +15,25 @@
 		{
 			"path": "./data_type"
 		},
+		{
+			"path": "./function"
+		},
+		{
+			"path": "./comment"
+		},
+		{
+			"path": "./control_flow"
+		},
 	],
 	"settings": {
 		"cSpell.words": [
 			"rustaceans"
-		]
+		],
+		"search.exclude": {
+			"**/node_modules": true,
+			"**/*.code-search": true,
+			"**/target": true,
+			"**/*.lock": true
+		}
 	}
 }
