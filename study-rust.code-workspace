@@ -24,6 +24,9 @@
 		{
 			"path": "./control_flow"
 		},
+		{
+			"path": "./ownership"
+		},
 	],
 	"settings": {
 		"cSpell.words": [
