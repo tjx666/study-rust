@@ -119,9 +119,88 @@ fn main() {
     // 1. 将 ss1 所有权转移给了 函数参数 s, ss1 失效
     // 2. 通过函数返回值把借出去的所有权还回给了 ss2
     let ss2 = borrow_then_back(ss1);
+    // borrow of moved value: `ss1` value borrowed here after move
+    // println!("{}", ss1);
 
     // 我们可以使用元组来返回多个值
     fn get_origin() -> (i32, i32) {
         (0, 0)
     }
+
+    // ------------------------ 引用和借用 -----------------------------
+    fn calculate_len(s: &String) -> usize {
+        // 声明一个引用类型就是 &Type
+        // s 引用传进来的 s3 并没有转移所有权
+        s.len()
+    } // s 离开作用域只会弹出栈顶的 s 引用本身，不会回收 s3, 因为 s 并不是 s3 的 owner
+    let s3 = String::from("s3");
+    calculate_len(&s3);
+    // 可以继续使用 s3, owner 还是 s3
+    println!("{}", s3);
+
+    // 引用是名词，借用是动词
+    // We call the action of creating a reference borrowing
+
+    //  &Type 声明的是不可变引用
+    fn change_1(s: &String) {
+        // `s` is a `&` reference, so the data it refers to cannot be borrowed as mutable
+        // s.push_str(", world!");
+    }
+
+    fn change_2(s: &mut String) {
+        s.push_str(", world!");
+    }
+    let mut hello = String::from("hello");
+    change_2(&mut hello);
+    println!("{}", hello);
+
+    let s4 = String::from("s4");
+    // 一个变量可以有无数个不可变引用
+    let r1 = &s4;
+    let r2 = &s4;
+
+    // rust 不允许同时使用多个可变引用
+    let mut s5 = String::from("s5");
+    let mutable_r1 = &mut s5;
+    let mutable_r2 = &mut s5;
+    // 用了就会报错：cannot borrow `s5` as mutable more than once at a time
+    // println!("{}", mutable_r1);
+
+    // rust 不允许同时使用指向同一个变量的不可变引用和可变引用
+    let mut s6 = String::from("s6");
+    let s6_ref = &s6;
+    let s6_mutable_ref1 = &mut s6;
+    // 同时使用可变和不可变引用可能会导致数据竞争
+    // println!("{}{}",s6_ref,  s6_mutable_ref1);
+
+    // 不允许同时使用多个可变引用或者同时同时可变与不可变引用的原因：rust 想要在编译期间就能避免发生数据竞争
+    // 我理解数据竞争应该就是并发安全的意思
+
+    // 数据竞争发生的条件
+    // 1. 同时存在 1 个以上的引用
+    // 2. 至少有一个变量有权访问变量
+    // 3. 没有其它机制用于管理同步访问（例如 java 中可以用锁）
+
+    // 可以通过创建一个 scoop 来使用多个可变引用
+    {
+        // 这种情况明显不会发生数据竞争，同步执行代码
+        let s6_mutable_ref2 = &mut s6;
+        println!("{}", s6);
+    }
+
+    // 引用的作用域范围是声明引用的地方到最后一次使用它的地方
+    let mut good = String::from("好");
+    let good_ref = &good;
+    println!("{}", good_ref); // 最后一次使用 good_ref 在这，作用域结束
+
+    let good_mut_ref = &mut good;
+    println!("{}", good);
+
+    // rust 编译器能够保证引用是可用的，不会出现像 c++ 中的悬空指针或者说野指针
+    // fn get_ref() -> &String {
+    //     let s = String::form("xx");
+    //     &s
+    // } // s 出了作用域就销毁了, 返回的引用就悬空了
+    // 这里可以直接返回 s，通过返回值转移所有权
+    // his function's return type contains a borrowed value, but there is no value for it to be borrowed from
 }
