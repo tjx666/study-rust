@@ -203,4 +203,67 @@ fn main() {
     // } // s 出了作用域就销毁了, 返回的引用就悬空了
     // 这里可以直接返回 s，通过返回值转移所有权
     // his function's return type contains a borrowed value, but there is no value for it to be borrowed from
+
+    // ------------------------ 切片 -----------------------------
+
+    println!("{}", "我".as_bytes().len()); // 3
+    println!("{}", "a".as_bytes().len()); // 1
+    println!("{}", "🚀".as_bytes().len()); // 4
+
+    /// 返回字符串第一个单词
+    /// 可以认为单词前面没有空格，返回第一个单词所在下标 + 1
+    fn find_word(s: &String) -> usize {
+        for (i, &item) in s.as_bytes().iter().enumerate() {
+            if (item == b' ') {
+                return i;
+            }
+        }
+        return s.len();
+    }
+    // 返回下标的方式其实不太安全，因为可能字符串内容被修改，索引失效
+
+    let s7 = String::from("Hello world!");
+    println!("{}", find_word(&s7));
+
+    let s8 = String::from("Pine apple");
+    // 切片本质就是引用，只不过带范围
+    let slice = &s8[..];
+
+    // 返回切片避免字符串被修改
+    fn first_word1(s: &String) -> &str {
+        let bytes = s.as_bytes();
+
+        for (i, &item) in bytes.iter().enumerate() {
+            if item == b' ' {
+                return &s[0..i];
+            }
+        }
+
+        &s[..]
+    }
+
+    {
+        let mut s = String::from("hello world");
+
+        first_word1(&s);
+
+        s.clear(); // 错误!
+
+        // println!("the first word is: {}", word);
+    }
+
+    // 字符串字面量类型本质上是一个切片，不可变引用，所以不可修改
+    // 使用字符串切片做类型参数比使用 &String 更通用
+    // 当你吧 &String 传给字符串切片参数时发生了类型转换
+
+    // 很多集合类型都有切片
+    let arr = [1, 2, 3];
+    let arr_slice = &arr[..];
+
+    /*
+    总的来说：
+    1. 所有权机制保证了变量在脱离了作用域后内存被回收
+    2. 引用限制保证了不会发生数据竞争和访问悬空指针
+    3. 切片工具让我们在数据安全访问更进一步，可以访问集合的一部分，并且不会发生数据竞争
+     */
 }
