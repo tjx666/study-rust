@@ -27,14 +27,15 @@
 		{
 			"path": "./ownership"
 		},
+		{
+			"path": "./structs"
+		}
 	],
 	"settings": {
 		"cSpell.words": [
 			"rustaceans"
 		],
 		"search.exclude": {
-			"**/node_modules": true,
-			"**/*.code-search": true,
 			"**/target": true,
 			"**/*.lock": true
 		}
