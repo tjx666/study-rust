@@ -112,7 +112,7 @@ fn main() {
     println!("{}", point1.0);
 
     // rust 不是结构化类型，因此不存在两个元组成员类型和顺序相同就可以相互赋值
-    struct Color (i32, i32);
+    struct Color(i32, i32);
     // expected struct `Point`, found struct `Color`
     // point1 = Color(100, 100);
 
@@ -121,5 +121,61 @@ fn main() {
     // 定义时不需要声明字段
     struct AlwaysEqual;
     let always_equal = AlwaysEqual;
-    
+
+    // ------------------------ 输出结构体 -----------------------------
+    // 方法 1：
+    // 使用 derive attribute 去给我们的自定义类型添加其它 trait 的行为
+    // 就可以在 println1 宏里面使用针对结构体的输出格式
+    // Debug 是派生 trait
+    #[derive(Debug)]
+    struct Line {
+        start: (i32, i32),
+        end: (i32, i32),
+    }
+
+    let line = Line {
+        start: (0, 0),
+        end: (0, 10),
+    };
+    println!("{:?}", line);
+    /* =>
+    Line { start: (0, 0), end: (0, 10) }
+     */
+    println!("{:#?}", line);
+    /* =>
+    Line {
+    start: (
+        0,
+        0,
+    ),
+    end: (
+        0,
+        10,
+    ),
+     */
+
+    // 方法二：派生 Debug trait, 使用 dbg! 宏
+    // 这个宏会将输出输出到 stderr, 并附带使用处的代码行号
+    dbg!(line);
+    /* =>
+    [src/main.rs:158] line = Line {
+        start: (
+            0,
+            0,
+        ),
+        end: (
+            0,
+            10,
+        ),
+    }
+     */
+
+    // 看看源码实现
+    /*
+       $crate::eprintln!("[{}:{}] {} = {:#?}",
+                   $crate::file!(), $crate::line!(), $crate::stringify!($val), &tmp);
+    */
+    // 需要注意的是 dbg! 宏会转移所有权，但同时也会返回所有权
+    // 由于上面没有对 line 重新赋值，因此，此时 line 已经失效了
+    // println!("{:?}", line);
 }
