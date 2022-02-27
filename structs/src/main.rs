@@ -175,7 +175,56 @@ fn main() {
        $crate::eprintln!("[{}:{}] {} = {:#?}",
                    $crate::file!(), $crate::line!(), $crate::stringify!($val), &tmp);
     */
-    // 需要注意的是 dbg! 宏会转移所有权，但同时也会返回所有权
+    // !: 需要注意的是 dbg! 宏会转移所有权，但同时也会返回所有权
     // 由于上面没有对 line 重新赋值，因此，此时 line 已经失效了
     // println!("{:?}", line);
+
+    // ------------------------ 定义 方法 -----------------------------
+    // 和很多其它语言一样，方法可以理解非全局的函数，或者说成员方法叫函数
+    // 聚体到 rust，在结构体，枚举，trait 对象内的函数叫方法
+    // rust 相比较特殊的是，它的第一个参数始终是 self
+    struct Rectangle {
+        width: i32,
+        height: i32,
+    }
+
+    // 使用 impl 块来声明和 Rectangle 相关联的东西
+    impl Rectangle {
+        // 方法的第一个参数必定是 self
+        // 当然形式有很多：self, &self, mut self, &mut self
+        // &self 是 self: &Self 的语法糖
+        // 这里不使用 self，是因为不需要所有权
+        fn area(&self) -> i32 {
+            self.width * self.height
+        }
+
+        // 如果调用方法后需要原本实例失效比较适合使用 self 声明
+        // 例如将实例转换成另外一种实例的时候
+        fn transform_to_string(self) -> String {
+            let mut s = String::from(self.width.to_string());
+            s.push_str(", ");
+            s.push_str(&self.height.to_string());
+            s
+        }
+    }
+
+    let rect = Rectangle {
+        width: 100,
+        height: 100,
+    };
+    rect.area();
+    // 其实等同于 ，rust 自动引用了
+    (&rect).area();
+
+    // 关联函数：impl 块里的函数都是关联函数，声明了 self 参数的函数称之为方法
+    // 类似于其它语言中的静态方法，如果关联函数可以不声明 self 参数
+    // 同时这里再一次多 Rectangle 使用了 impl, 说明 rust 允许对一个结构体多次 impl
+    impl Rectangle {
+        fn square(size: i32) -> Rectangle {
+            Rectangle {
+                width: size,
+                height: size,
+            }
+        }
+    }
 }
