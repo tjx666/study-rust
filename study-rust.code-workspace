@@ -29,7 +29,10 @@
 		},
 		{
 			"path": "./structs"
-		}
+		},
+		{
+			"path": "./enums"
+		},
 	],
 	"settings": {
 		"cSpell.words": [
@@ -38,6 +41,6 @@
 		"search.exclude": {
 			"**/target": true,
 			"**/*.lock": true
-		}
+		},
 	}
 }
