@@ -1,46 +1,47 @@
 {
-	"folders": [
-		{
-			"path": "./hello_world"
-		},
-		{
-			"path": "./hello_cargo"
-		},
-		{
-			"path": "./guessing_game"
-		},
-		{
-			"path": "./variables"
-		},
-		{
-			"path": "./data_type"
-		},
-		{
-			"path": "./function"
-		},
-		{
-			"path": "./comment"
-		},
-		{
-			"path": "./control_flow"
-		},
-		{
-			"path": "./ownership"
-		},
-		{
-			"path": "./structs"
-		},
-		{
-			"path": "./enums"
-		},
-	],
-	"settings": {
-		"cSpell.words": [
-			"rustaceans"
-		],
-		"search.exclude": {
-			"**/target": true,
-			"**/*.lock": true
-		},
-	}
+    "folders": [
+        {
+            "path": "./hello_world"
+        },
+        {
+            "path": "./hello_cargo"
+        },
+        {
+            "path": "./guessing_game"
+        },
+        {
+            "path": "./variables"
+        },
+        {
+            "path": "./data_type"
+        },
+        {
+            "path": "./function"
+        },
+        {
+            "path": "./comment"
+        },
+        {
+            "path": "./control_flow"
+        },
+        {
+            "path": "./ownership"
+        },
+        {
+            "path": "./structs"
+        },
+        {
+            "path": "./enums"
+        },
+        {
+            "path": "./restaurant"
+        }
+    ],
+    "settings": {
+        "cSpell.words": ["rustaceans"],
+        "search.exclude": {
+            "**/target": true,
+            "**/*.lock": true
+        }
+    }
 }
