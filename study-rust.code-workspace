@@ -35,6 +35,9 @@
         },
         {
             "path": "./restaurant"
+        },
+        {
+            "path": "./collection"
         }
     ],
     "settings": {

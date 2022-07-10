@@ -258,7 +258,15 @@ fn main() {
 
     // 很多集合类型都有切片
     let arr = [1, 2, 3];
-    let arr_slice = &arr[..];
+    // 类型签名 &[i32; 3]
+    let arr_ref = &arr;
+    // 类型签名 &[i32]
+    let arr_slice = &arr[0..1];
+    println!("{}", arr_slice[1]);
+
+    let mut string1 = String::from("xxx");
+    let string_ref = &string1;
+    let string_slice = & mut string1[..];
 
     /*
     总的来说：
