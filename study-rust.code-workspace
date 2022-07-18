@@ -44,6 +44,12 @@
         },
         {
             "path": "./generic"
+        },
+        {
+            "path": "./study_trait"
+        },
+        {
+            "path": "./lifetime"
         }
     ],
     "settings": {
