@@ -50,6 +50,9 @@
         },
         {
             "path": "./lifetime"
+        },
+        {
+            "path": "./tests"
         }
     ],
     "settings": {
