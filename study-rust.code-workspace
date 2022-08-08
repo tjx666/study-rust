@@ -53,6 +53,9 @@
         },
         {
             "path": "./tests"
+        },
+        {
+            "path": "./mini_grep"
         }
     ],
     "settings": {
