@@ -56,6 +56,9 @@
         },
         {
             "path": "./mini_grep"
+        },
+        {
+            "path": "./smart_object"
         }
     ],
     "settings": {
