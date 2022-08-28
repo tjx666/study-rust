@@ -1,64 +1,70 @@
 {
     "folders": [
         {
-            "path": "./hello_world"
+            "path": "hello_world"
         },
         {
-            "path": "./hello_cargo"
+            "path": "hello_cargo"
         },
         {
-            "path": "./guessing_game"
+            "path": "guessing_game"
         },
         {
-            "path": "./variables"
+            "path": "variables"
         },
         {
-            "path": "./data_type"
+            "path": "data_type"
         },
         {
-            "path": "./function"
+            "path": "function"
         },
         {
-            "path": "./comment"
+            "path": "comment"
         },
         {
-            "path": "./control_flow"
+            "path": "control_flow"
         },
         {
-            "path": "./ownership"
+            "path": "ownership"
         },
         {
-            "path": "./structs"
+            "path": "structs"
         },
         {
-            "path": "./enums"
+            "path": "enums"
         },
         {
-            "path": "./restaurant"
+            "path": "restaurant"
         },
         {
-            "path": "./collection"
+            "path": "collection"
         },
         {
-            "path": "./panic"
+            "path": "panic"
         },
         {
-            "path": "./generic"
+            "path": "generic"
         },
         {
-            "path": "./study_trait"
+            "path": "study_trait"
         },
         {
-            "path": "./lifetime"
+            "path": "lifetime"
         },
         {
-            "path": "./tests"
+            "path": "tests"
         },
         {
-            "path": "./mini_grep"
+            "path": "mini_grep"
         },
         {
-            "path": "./smart_object"
+            "path": "smart_object"
+        },
+        {
+            "path": "concurrency"
+        },
+        {
+            "path": "closure"
         }
     ],
     "settings": {
